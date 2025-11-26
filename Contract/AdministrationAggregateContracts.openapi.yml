@@ -1,0 +1,1442 @@
+openapi: 3.0.3
+info:
+  title: SlotIQ Administration Aggregate API (V1)
+  description: API for managing administrative entities including practices, roles, permissions, and lookup data in the SlotIQ interview system
+  version: 1.0.0
+  contact:
+    name: SlotIQ Team
+    email: slotiq@aspiresys.com
+ 
+servers:
+  - url: https://api.slotiq.com/v1
+    description: Production server
+  - url: https://dev-api.slotiq.com/v1
+    description: Development server
+ 
+security:
+  - BearerAuth: []
+ 
+tags:
+  - name: Practices
+    description: Practice management operations
+  - name: Roles
+    description: Member role management operations
+  - name: Permissions
+    description: Permission management and role mappings
+  - name: LookupData
+    description: Operations for managing various lookup/reference data
+ 
+paths:
+  /slotiq/v1/lookups/opportunityCategories/{opportunityCategoryID}:
+    get:
+      summary: Get opportunity category by ID
+      description: Retrieve specific opportunity category details
+      operationId: getOpportunityCategoryById
+      tags: [LookupData]
+      parameters:
+        - name: opportunityCategoryID
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Opportunity category details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOpportunityCategoryResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  /slotiq/v1/lookups/candidateDesignations/{candidateDesignationID}:
+    get:
+      summary: Get candidate designation by ID
+      description: Retrieve specific candidate designation details
+      operationId: getCandidateDesignationById
+      tags: [LookupData]
+      parameters:
+        - name: candidateDesignationID
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Candidate designation details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandidateDesignationResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  /slotiq/v1/lookups/rescheduleReasons/{rescheduleHistoryReasonID}:
+    get:
+      summary: Get reschedule reason by ID
+      description: Retrieve specific interview reschedule reason details
+      operationId: getRescheduleReasonById
+      tags: [LookupData]
+      parameters:
+        - name: rescheduleHistoryReasonID
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Reschedule reason details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRescheduleReasonResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  /slotiq/v1/lookups/interviewTypes/{interviewTypeID}:
+    get:
+      summary: Get interview type by ID
+      description: Retrieve specific interview type details
+      operationId: getInterviewTypeById
+      tags: [LookupData]
+      parameters:
+        - name: interviewTypeID
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Interview type details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterviewTypeResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  /slotiq/v1/lookups/scheduleTypes/{interviewScheduleTypeID}:
+    get:
+      summary: Get interview schedule type by ID
+      description: Retrieve specific interview schedule type details
+      operationId: getScheduleTypeById
+      tags: [LookupData]
+      parameters:
+        - name: interviewScheduleTypeID
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Interview schedule type details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScheduleTypeResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  /slotiq/v1/lookups/availabilityPlanTypes/{availabilityPlanTypeID}:
+    get:
+      summary: Get availability plan type by ID
+      description: Retrieve specific availability plan type details
+      operationId: getAvailabilityPlanTypeById
+      tags: [LookupData]
+      parameters:
+        - name: availabilityPlanTypeID
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Availability plan type details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAvailabilityPlanTypeResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  /slotiq/v1/lookups/scheduleStatuses/{scheduleStatusID}:
+    get:
+      summary: Get interview schedule status by ID
+      description: Retrieve specific interview schedule status details
+      operationId: getScheduleStatusById
+      tags: [LookupData]
+      parameters:
+        - name: scheduleStatusID
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Interview schedule status details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScheduleStatusResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  /slotiq/v1/lookups/recruitmentPositions/{recruitmentPositionID}:
+    get:
+      summary: Get recruitment position by ID
+      description: Retrieve specific recruitment position details
+      operationId: getRecruitmentPositionById
+      tags: [LookupData]
+      parameters:
+        - name: recruitmentPositionID
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Recruitment position details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecruitmentPositionResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  /slotiq/v1/lookups/applicableLevels/{applicableLevelID}:
+    get:
+      summary: Get applicable level by ID
+      description: Retrieve specific applicable level details
+      operationId: getApplicableLevelById
+      tags: [LookupData]
+      parameters:
+        - name: applicableLevelID
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Applicable level details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApplicableLevelResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  # Practice Management Endpoints
+  /slotiq/v1/practices:
+    post:
+      summary: Create new practice
+      description: Create a new practice in the system
+      operationId: createPractice
+      tags: [Practices]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePracticeRequest'
+      responses:
+        '201':
+          description: Practice created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePracticeResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+    get:
+      summary: Get all practices
+      description: Retrieve list of all practices with pagination
+      operationId: getAllPractices
+      tags: [Practices]
+      parameters:
+        - name: pageNumber
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+            enum: [name, createdDate, modifiedDate]
+            default: name
+        - name: sortOrder
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+        - name: isActive
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Practices retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPracticesResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  /slotiq/v1/practices/{practiceId}:
+    get:
+      summary: Get practice by ID
+      description: Retrieve specific practice details
+      operationId: getPracticeById
+      tags: [Practices]
+      parameters:
+        - name: practiceId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Practice details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPracticeResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+    put:
+      summary: Update practice
+      description: Modify existing practice details
+      operationId: updatePractice
+      tags: [Practices]
+      parameters:
+        - name: practiceId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePracticeRequest'
+      responses:
+        '200':
+          description: Practice updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePracticeResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+    delete:
+      summary: Deactivate practice
+      description: Soft delete a practice
+      operationId: deactivatePractice
+      tags: [Practices]
+      parameters:
+        - name: practiceId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivatePracticeRequest'
+      responses:
+        '200':
+          description: Practice deactivated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivatePracticeResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+ 
+  # Role Management Endpoints
+  /slotiq/v1/roles:
+    post:
+      summary: Create new role
+      description: Create a new member role in the system
+      operationId: createRole
+      tags: [Roles]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleRequest'
+      responses:
+        '201':
+          description: Role created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRoleResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          $ref: '#/components/responses/Conflict'
+ 
+    get:
+      summary: Get all roles
+      description: Retrieve list of all roles
+      operationId: getAllRoles
+      tags: [Roles]
+      parameters:
+        - name: isActive
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Roles retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRolesResponse'
+ 
+  # Permission Management Endpoints
+  /slotiq/v1/permissions:
+    post:
+      summary: Create new permission
+      description: Create a new permission in the system
+      operationId: createPermission
+      tags: [Permissions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePermissionRequest'
+      responses:
+        '201':
+          description: Permission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePermissionResponse'
+ 
+    get:
+      summary: Get all permissions
+      description: Retrieve list of all permissions
+      operationId: getAllPermissions
+      tags: [Permissions]
+      parameters:
+        - name: isActive
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Permissions retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPermissionsResponse'
+ 
+  # Role-Permission Mapping Endpoints
+  /slotiq/v1/roles/{roleId}/permissions:
+    post:
+      summary: Map permissions to role
+      description: Create role-permission mappings
+      operationId: mapRolePermissions
+      tags: [Permissions]
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MapRolePermissionsRequest'
+      responses:
+        '201':
+          description: Permissions mapped successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapRolePermissionsResponse'
+ 
+    get:
+      summary: Get role permissions
+      description: Retrieve permissions mapped to a role
+      operationId: getRolePermissions
+      tags: [Permissions]
+      parameters:
+        - name: roleId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Role permissions retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRolePermissionsResponse'
+ 
+  # Lookup Data Management Endpoints
+  /slotiq/v1/lookups/opportunityCategories:
+    get:
+      summary: Get opportunity categories
+      description: Retrieve all opportunity categories
+      operationId: getOpportunityCategories
+      tags: [LookupData]
+      responses:
+        '200':
+          description: Categories retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOpportunityCategoriesResponse'
+ 
+ 
+  /slotiq/v1/lookups/candidateDesignations:
+    get:
+      summary: Get candidate designations
+      description: Retrieve all candidate designations
+      operationId: getCandidateDesignations
+      tags: [LookupData]
+      responses:
+        '200':
+          description: Designations retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandidateDesignationsResponse'
+ 
+ 
+  /slotiq/v1/lookups/rescheduleReasons:
+    get:
+      summary: Get reschedule reasons
+      description: Retrieve all interview reschedule reasons
+      operationId: getRescheduleReasons
+      tags: [LookupData]
+      responses:
+        '200':
+          description: Reasons retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRescheduleReasonsResponse'
+ 
+ 
+  /slotiq/v1/lookups/interviewTypes:
+    get:
+      summary: Get interview types
+      description: Retrieve all interview types
+      operationId: getInterviewTypes
+      tags: [LookupData]
+      responses:
+        '200':
+          description: Types retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterviewTypesResponse'
+ 
+ 
+  /slotiq/v1/lookups/scheduleTypes:
+    get:
+      summary: Get schedule types
+      description: Retrieve all interview schedule types
+      operationId: getScheduleTypes
+      tags: [LookupData]
+      responses:
+        '200':
+          description: Schedule types retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScheduleTypesResponse'
+ 
+ 
+  /slotiq/v1/lookups/availabilityPlanTypes:
+    get:
+      summary: Get availability plan types
+      description: Retrieve all availability plan types
+      operationId: getAvailabilityPlanTypes
+      tags: [LookupData]
+      responses:
+        '200':
+          description: Plan types retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAvailabilityPlanTypesResponse'
+ 
+ 
+  /slotiq/v1/lookups/scheduleStatuses:
+    get:
+      summary: Get schedule statuses
+      description: Retrieve all interview schedule statuses
+      operationId: getScheduleStatuses
+      tags: [LookupData]
+      responses:
+        '200':
+          description: Statuses retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScheduleStatusesResponse'
+ 
+ 
+  /slotiq/v1/lookups/recruitmentPositions:
+    get:
+      summary: Get recruitment positions
+      description: Retrieve all recruitment positions
+      operationId: getRecruitmentPositions
+      tags: [LookupData]
+      responses:
+        '200':
+          description: Positions retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecruitmentPositionsResponse'
+ 
+ 
+  /slotiq/v1/lookups/applicableLevels:
+    get:
+      summary: Get applicable levels
+      description: Retrieve all applicable levels
+      operationId: getApplicableLevels
+      tags: [LookupData]
+      responses:
+        '200':
+          description: Levels retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApplicableLevelsResponse'
+ 
+ 
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication
+ 
+  responses:
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+   
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+   
+    Conflict:
+      description: Resource already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+   
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+   
+    Forbidden:
+      description: Permission denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+   
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+ 
+  schemas:
+    # --- Lookup GetById Response Wrappers ---
+    GetOpportunityCategoryResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'OPPORTUNITY_CATEGORY_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Opportunity category details retrieved successfully.'
+        category:
+          $ref: '#/components/schemas/OpportunityCategoryDto'
+ 
+    GetCandidateDesignationResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'CANDIDATE_DESIGNATION_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Candidate designation details retrieved successfully.'
+        designation:
+          $ref: '#/components/schemas/CandidateDesignationDto'
+ 
+    GetRescheduleReasonResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'RESCHEDULE_REASON_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Reschedule reason details retrieved successfully.'
+        reason:
+          $ref: '#/components/schemas/RescheduleReasonDto'
+ 
+    GetInterviewTypeResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_TYPE_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview type details retrieved successfully.'
+        type:
+          $ref: '#/components/schemas/InterviewTypeDto'
+ 
+    GetScheduleTypeResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'SCHEDULE_TYPE_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule type details retrieved successfully.'
+        type:
+          $ref: '#/components/schemas/InterviewScheduleTypeDto'
+ 
+    GetAvailabilityPlanTypeResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'AVAILABILITY_PLAN_TYPE_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Availability plan type details retrieved successfully.'
+        type:
+          $ref: '#/components/schemas/AvailabilityPlanTypeDto'
+ 
+    GetScheduleStatusResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'SCHEDULE_STATUS_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule status details retrieved successfully.'
+        status:
+          $ref: '#/components/schemas/InterviewScheduleStatusDto'
+ 
+    GetRecruitmentPositionResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'RECRUITMENT_POSITION_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Recruitment position details retrieved successfully.'
+        position:
+          $ref: '#/components/schemas/RecruitmentPositionDto'
+ 
+    GetApplicableLevelResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'APPLICABLE_LEVEL_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Applicable level details retrieved successfully.'
+        level:
+          $ref: '#/components/schemas/ApplicableLevelDto'
+    # Common Enums
+    SourceEnum:
+      type: integer
+      format: int32
+      enum: [1, 2, 3, 4, 5]
+      x-enumNames: [Web, Mobile, API, Thirdparty, Manual]
+      description: Source system of the operation
+ 
+    # Practice DTOs and Requests/Responses
+    PracticeDto:
+      type: object
+      properties:
+        practiceID:
+          type: string
+          format: uuid
+          description: Unique system generated ID
+        name:
+          type: string
+          minLength: 2
+          maxLength: 50
+          description: Name of the Practice
+        description:
+          type: string
+          maxLength: 500
+          nullable: true
+          description: Short description about the practice purpose
+        isActive:
+          type: boolean
+          description: Active status of the practice
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modUser:
+          type: string
+          maxLength: 50
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    CreatePracticeRequest:
+      type: object
+      required:
+        - name
+        - modUser
+        - source
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 50
+        description:
+          type: string
+          maxLength: 500
+          nullable: true
+        modUser:
+          type: string
+          maxLength: 50
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    UpdatePracticeRequest:
+      type: object
+      required:
+        - modUser
+        - source
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 50
+        description:
+          type: string
+          maxLength: 500
+          nullable: true
+        modUser:
+          type: string
+          maxLength: 50
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    DeactivatePracticeRequest:
+      type: object
+      required:
+        - reason
+        - modUser
+        - source
+      properties:
+        reason:
+          type: string
+          maxLength: 500
+        modUser:
+          type: string
+          maxLength: 50
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    CreatePracticeResponse:
+      type: object
+      properties:
+        practiceID:
+          type: string
+          format: uuid
+ 
+    UpdatePracticeResponse:
+      type: object
+      properties:
+        practiceID:
+          type: string
+          format: uuid
+ 
+    DeactivatePracticeResponse:
+      type: object
+      properties:
+        practiceID:
+          type: string
+          format: uuid
+ 
+    GetPracticeResponse:
+      type: object
+      properties:
+        practice:
+          $ref: '#/components/schemas/PracticeDto'
+ 
+    GetPracticesResponse:
+      type: object
+      properties:
+        practices:
+          type: array
+          items:
+            $ref: '#/components/schemas/PracticeDto'
+        totalCount:
+          type: integer
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+ 
+    # Role DTOs and Requests/Responses
+    RoleDto:
+      type: object
+      properties:
+        roleID:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: Unique name for application use
+        displayName:
+          type: string
+          description: Display friendly name
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modUser:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    CreateRoleRequest:
+      type: object
+      required:
+        - name
+        - displayName
+        - modUser
+        - source
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        modUser:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    CreateRoleResponse:
+      type: object
+      properties:
+        roleID:
+          type: string
+          format: uuid
+ 
+    GetRolesResponse:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDto'
+ 
+    # Permission DTOs and Requests/Responses
+    PermissionDto:
+      type: object
+      properties:
+        permissionID:
+          type: string
+          format: uuid
+        name:
+          type: string
+        displayName:
+          type: string
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modUser:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    CreatePermissionRequest:
+      type: object
+      required:
+        - name
+        - displayName
+        - modUser
+        - source
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        modUser:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    CreatePermissionResponse:
+      type: object
+      properties:
+        permissionID:
+          type: string
+          format: uuid
+ 
+    GetPermissionsResponse:
+      type: object
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionDto'
+ 
+    # Role-Permission Mapping DTOs and Requests/Responses
+    MapRolePermissionsRequest:
+      type: object
+      required:
+        - permissionIDs
+        - modUser
+        - source
+      properties:
+        permissionIDs:
+          type: array
+          items:
+            type: string
+            format: uuid
+        modUser:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    MapRolePermissionsResponse:
+      type: object
+      properties:
+        mappingIDs:
+          type: array
+          items:
+            type: string
+            format: uuid
+ 
+    GetRolePermissionsResponse:
+      type: object
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionDto'
+ 
+    # Lookup Data DTOs and Requests/Responses
+    BaseLookupDto:
+      type: object
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        isActive:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modUser:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    CreateBaseLookupRequest:
+      type: object
+      required:
+        - name
+        - displayName
+        - modUser
+        - source
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        modUser:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+ 
+    # Opportunity Category
+    OpportunityCategoryDto:
+      allOf:
+        - $ref: '#/components/schemas/BaseLookupDto'
+        - type: object
+          properties:
+            opportunityCategoryID:
+              type: string
+              format: uuid
+ 
+    CreateOpportunityCategoryRequest:
+      $ref: '#/components/schemas/CreateBaseLookupRequest'
+ 
+    CreateOpportunityCategoryResponse:
+      type: object
+      properties:
+        opportunityCategoryID:
+          type: string
+          format: uuid
+ 
+    GetOpportunityCategoriesResponse:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpportunityCategoryDto'
+ 
+    # Candidate Designation
+    CandidateDesignationDto:
+      allOf:
+        - $ref: '#/components/schemas/BaseLookupDto'
+        - type: object
+          properties:
+            candidateDesignationID:
+              type: string
+              format: uuid
+ 
+    CreateCandidateDesignationRequest:
+      $ref: '#/components/schemas/CreateBaseLookupRequest'
+ 
+    CreateCandidateDesignationResponse:
+      type: object
+      properties:
+        candidateDesignationID:
+          type: string
+          format: uuid
+ 
+    GetCandidateDesignationsResponse:
+      type: object
+      properties:
+        designations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CandidateDesignationDto'
+ 
+    # Interview Type
+    InterviewTypeDto:
+      allOf:
+        - $ref: '#/components/schemas/BaseLookupDto'
+        - type: object
+          properties:
+            interviewTypeID:
+              type: string
+              format: uuid
+ 
+    CreateInterviewTypeRequest:
+      $ref: '#/components/schemas/CreateBaseLookupRequest'
+ 
+    CreateInterviewTypeResponse:
+      type: object
+      properties:
+        interviewTypeID:
+          type: string
+          format: uuid
+ 
+    GetInterviewTypesResponse:
+      type: object
+      properties:
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterviewTypeDto'
+ 
+    # Reschedule Reason
+    RescheduleReasonDto:
+      allOf:
+        - $ref: '#/components/schemas/BaseLookupDto'
+        - type: object
+          properties:
+            rescheduleHistoryReasonID:
+              type: string
+              format: uuid
+ 
+    CreateRescheduleReasonRequest:
+      $ref: '#/components/schemas/CreateBaseLookupRequest'
+ 
+    CreateRescheduleReasonResponse:
+      type: object
+      properties:
+        rescheduleHistoryReasonID:
+          type: string
+          format: uuid
+ 
+    GetRescheduleReasonsResponse:
+      type: object
+      properties:
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/RescheduleReasonDto'
+ 
+ 
+    # Schedule Type
+    InterviewScheduleTypeDto:
+      allOf:
+        - $ref: '#/components/schemas/BaseLookupDto'
+        - type: object
+          properties:
+            interviewScheduleTypeID:
+              type: string
+              format: uuid
+              description: Unique ID
+ 
+    CreateScheduleTypeRequest:
+      $ref: '#/components/schemas/CreateBaseLookupRequest'
+ 
+    CreateScheduleTypeResponse:
+      type: object
+      properties:
+        interviewScheduleTypeID:
+          type: string
+          format: uuid
+ 
+    GetScheduleTypesResponse:
+      type: object
+      properties:
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterviewScheduleTypeDto'
+ 
+    # Availability Plan Type
+    AvailabilityPlanTypeDto:
+      allOf:
+        - $ref: '#/components/schemas/BaseLookupDto'
+        - type: object
+          properties:
+            availabilityPlanTypeID:
+              type: string
+              format: uuid
+              description: Unique ID
+ 
+    CreateAvailabilityPlanTypeRequest:
+      $ref: '#/components/schemas/CreateBaseLookupRequest'
+ 
+    CreateAvailabilityPlanTypeResponse:
+      type: object
+      properties:
+        availabilityPlanTypeID:
+          type: string
+          format: uuid
+ 
+    GetAvailabilityPlanTypesResponse:
+      type: object
+      properties:
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailabilityPlanTypeDto'
+ 
+    # Schedule Status
+    InterviewScheduleStatusDto:
+      allOf:
+        - $ref: '#/components/schemas/BaseLookupDto'
+        - type: object
+          properties:
+            scheduleStatusID:
+              type: string
+              format: uuid
+              description: Unique ID
+ 
+    CreateScheduleStatusRequest:
+      $ref: '#/components/schemas/CreateBaseLookupRequest'
+ 
+    CreateScheduleStatusResponse:
+      type: object
+      properties:
+        scheduleStatusID:
+          type: string
+          format: uuid
+ 
+    GetScheduleStatusesResponse:
+      type: object
+      properties:
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterviewScheduleStatusDto'
+ 
+    # Recruitment Position
+    RecruitmentPositionDto:
+      allOf:
+        - $ref: '#/components/schemas/BaseLookupDto'
+        - type: object
+          properties:
+            recruitmentPositionID:
+              type: string
+              format: uuid
+              description: Unique ID
+ 
+    CreateRecruitmentPositionRequest:
+      $ref: '#/components/schemas/CreateBaseLookupRequest'
+ 
+    CreateRecruitmentPositionResponse:
+      type: object
+      properties:
+        recruitmentPositionID:
+          type: string
+          format: uuid
+ 
+    GetRecruitmentPositionsResponse:
+      type: object
+      properties:
+        positions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecruitmentPositionDto'
+ 
+    # Applicable Level
+    ApplicableLevelDto:
+      allOf:
+        - $ref: '#/components/schemas/BaseLookupDto'
+        - type: object
+          properties:
+            applicableLevelID:
+              type: string
+              format: uuid
+              description: Unique ID
+ 
+    CreateApplicableLevelRequest:
+      $ref: '#/components/schemas/CreateBaseLookupRequest'
+ 
+    CreateApplicableLevelResponse:
+      type: object
+      properties:
+        applicableLevelID:
+          type: string
+          format: uuid
+ 
+    GetApplicableLevelsResponse:
+      type: object
+      properties:
+        levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicableLevelDto'
+ 
+    # Common Error Response
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: string

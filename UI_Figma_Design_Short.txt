@@ -1,0 +1,83 @@
+# Interview Management Platform – UI/UX Design Summary
+
+This document provides a concise summary of the app's UI/UX design for handoff to a Figma designer.
+---
+## 1. Main Modules & Screens
+- Login
+- Dashboard (role-based)
+- User Management (list, add/edit)
+- Practice Management (list, add/edit)
+- Designation/JD Management (tabs, add/edit)
+- Panel Member Management (list, add/edit)
+- Slot Management (calendar/table, add/edit)
+- Opportunity Management (list, add/edit)
+- Candidate Profile Management (list, add/edit)
+- Interview Scheduling (list, schedule, reschedule)
+- Feedback Management (submit, review)
+---
+## 2. Key Wireframe Layouts (ASCII)
+
+### Login
+[Logo]
+Email: [__________]
+Password: [__________]
+[Login]
+[Error Message]
+
+### Dashboard
+[Sidebar] [Stat Cards] [Recent Activity]
+
+### User List
+Name | Email | Role | Practice | Actions
+[Add User]
+
+### Practice List
+[Practice Card] [Practice Card] ...
+[Add Practice]
+
+### Designation/JD Management
+[Tabs: Designations | JDs]
+[Table/List]
+[Add/Edit/Delete]
+
+### Panel Member List
+Name | Role | Level | Practice | Actions
+[Add Panel Member]
+
+### Slot Management
+[Calendar/Table View]
+[Add/Edit Slot]
+
+### Opportunity & Candidate Management
+[Tabs: Opportunities | Candidates | Interviews]
+[Table/List]
+[Add/Edit/Delete]
+
+### Feedback Management
+[Feedback Table]
+[View Details]
+
+---
+
+## 3. User Flows (Sample)
+
+- Onboard User: Dashboard → User Management → Add User → Fill Form → Save
+- Create Practice: Dashboard → Practice Management → Add Practice → Fill Form → Save
+- Schedule Interview: Opportunities → Add Candidate → Schedule Interview → Select Slot → Save
+- Submit Feedback: My Interviews → Select Interview → Submit Feedback → Fill Form → Save
+
+---
+
+## 4. UI Components
+- Table, Card, Modal, Form Input, Dropdown, Date/Time Picker, Tabs, Pagination, Button, Toast/Alert, Sidebar, Header, Stat Card
+
+---
+
+## 5. Design Handoff Notes
+- Use clear sectioning, consistent form layouts, and role-based navigation.
+- Follow accessibility and responsive design best practices.
+- See full requirements for field-level validation and business rules.
+
+---
+
+This summary is ready for Figma wireframing. For detailed requirements, refer to the full design document.

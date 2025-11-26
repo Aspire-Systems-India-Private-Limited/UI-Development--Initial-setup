@@ -1,0 +1,1681 @@
+openapi: 3.0.3
+info:
+  title: SlotIQ Operations Aggregate API (V1)
+  description: API for managing operations entities including hiring opportunities, candidate profiles, interview schedules, and related data in the SlotIQ interview system
+  version: 1.0.0
+  contact:
+    name: SlotIQ Team
+    email: slotiq@aspiresys.com
+
+servers:
+  - url: https://api.slotiq.com/v1
+    description: Production server
+  - url: https://dev-api.slotiq.com/v1
+    description: Development server
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: HiringOpportunities
+    description: Hiring opportunity management operations
+  - name: CandidateProfiles
+    description: Candidate profile management operations
+  - name: InterviewSchedules
+    description: Interview schedule management operations
+  - name: InterviewRescheduleRequests
+    description: Interview reschedule request management operations
+  - name: InterviewScheduleChangeHistories
+    description: Interview schedule change history operations
+
+paths:
+  /slotiq/v1/hiringOpportunities:
+    post:
+      summary: Create new hiring opportunity
+      description: Create a new hiring opportunity in the system
+      operationId: createHiringOpportunity
+      tags: [HiringOpportunities]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHiringOpportunityRequest'
+      responses:
+        '201':
+          description: Hiring opportunity created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateHiringOpportunityResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      summary: Get all hiring opportunities
+      description: Retrieve list of all hiring opportunities with pagination
+      operationId: getAllHiringOpportunities
+      tags: [HiringOpportunities]
+      parameters:
+          - name: pageNumber
+            in: query
+            required: false
+            schema:
+              type: integer
+          - name: pageSize
+            in: query
+            required: false
+            schema:
+              type: integer
+          - name: sortBy
+            in: query
+            required: false
+            schema:
+              type: string
+          - name: sortOrder
+            in: query
+            required: false
+            schema:
+              type: string
+          - name: isActive
+            in: query
+            required: false
+            schema:
+              type: boolean
+      responses:
+        '200':
+          description: Hiring opportunities retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHiringOpportunitiesResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /slotiq/v1/hiringOpportunities/{hiringOpportunityID}:
+    get:
+      summary: Get hiring opportunity by ID
+      description: Retrieve specific hiring opportunity details
+      operationId: getHiringOpportunityById
+      tags: [HiringOpportunities]
+      parameters:
+          - name: hiringOpportunityID
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Hiring opportunity details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHiringOpportunityResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update hiring opportunity
+      description: Modify existing hiring opportunity details
+      operationId: updateHiringOpportunity
+      tags: [HiringOpportunities]
+      parameters:
+        - name: hiringOpportunityID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHiringOpportunityRequest'
+      responses:
+        '200':
+          description: Hiring opportunity updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateHiringOpportunityResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Deactivate hiring opportunity
+      description: Soft delete a hiring opportunity
+      operationId: deactivateHiringOpportunity
+      tags: [HiringOpportunities]
+      parameters:
+        - name: hiringOpportunityID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateHiringOpportunityRequest'
+      responses:
+        '200':
+          description: Hiring opportunity deactivated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivateHiringOpportunityResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /slotiq/v1/candidateProfiles:
+    post:
+      summary: Create new candidate profile
+      description: Create a new candidate profile in the system
+      operationId: createCandidateProfile
+      tags: [CandidateProfiles]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCandidateProfileRequest'
+      responses:
+        '201':
+          description: Candidate profile created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCandidateProfileResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          $ref: '#/components/responses/Conflict'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+          '500':
+            $ref: '#/components/responses/InternalServerError'
+    get:
+      summary: Get all candidate profiles
+      description: Retrieve list of all candidate profiles
+      operationId: getAllCandidateProfiles
+      tags: [CandidateProfiles]
+      parameters:
+          - name: isActive
+            in: query
+            required: false
+            schema:
+              type: boolean
+      responses:
+        '200':
+          description: Candidate profiles retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandidateProfilesResponse'
+          '400':
+            $ref: '#/components/responses/ValidationError'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+          '500':
+            $ref: '#/components/responses/InternalServerError'
+
+  /slotiq/v1/candidateProfiles/{candidateProfileID}:
+    get:
+      summary: Get candidate profile by ID
+      description: Retrieve specific candidate profile details
+      operationId: getCandidateProfileById
+      tags: [CandidateProfiles]
+      parameters:
+          - name: candidateProfileID
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Candidate profile details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandidateProfileResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+          '400':
+            $ref: '#/components/responses/ValidationError'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+    put:
+      summary: Update candidate profile
+      description: Modify existing candidate profile details
+      operationId: updateCandidateProfile
+      tags: [CandidateProfiles]
+      parameters:
+        - name: candidateProfileID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCandidateProfileRequest'
+      responses:
+        '200':
+          description: Candidate profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCandidateProfileResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+          '400':
+            $ref: '#/components/responses/ValidationError'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+    delete:
+      summary: Deactivate candidate profile
+      description: Soft delete a candidate profile
+      operationId: deactivateCandidateProfile
+      tags: [CandidateProfiles]
+      parameters:
+        - name: candidateProfileID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateCandidateProfileRequest'
+      responses:
+        '200':
+          description: Candidate profile deactivated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivateCandidateProfileResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+          '400':
+            $ref: '#/components/responses/ValidationError'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+
+  /slotiq/v1/interviewSchedules:
+    post:
+      summary: Create new interview schedule
+      description: Create a new interview schedule in the system
+      operationId: createInterviewSchedule
+      tags: [InterviewSchedules]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInterviewScheduleRequest'
+      responses:
+        '201':
+          description: Interview schedule created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInterviewScheduleResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    get:
+      summary: Get all interview schedules
+      description: Retrieve list of all interview schedules
+      operationId: getAllInterviewSchedules
+      tags: [InterviewSchedules]
+      parameters:
+          - name: isActive
+            in: query
+            required: false
+            schema:
+              type: boolean
+      responses:
+        '200':
+          description: Interview schedules retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterviewSchedulesResponse'
+
+  /slotiq/v1/interviewSchedules/{interviewScheduleID}:
+    get:
+      summary: Get interview schedule by ID
+      description: Retrieve specific interview schedule details
+      operationId: getInterviewScheduleById
+      tags: [InterviewSchedules]
+      parameters:
+          - name: interviewScheduleID
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Interview schedule details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterviewScheduleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update interview schedule
+      description: Modify existing interview schedule details
+      operationId: updateInterviewSchedule
+      tags: [InterviewSchedules]
+      parameters:
+        - name: interviewScheduleID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInterviewScheduleRequest'
+      responses:
+        '200':
+          description: Interview schedule updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateInterviewScheduleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Deactivate interview schedule
+      description: Soft delete an interview schedule
+      operationId: deactivateInterviewSchedule
+      tags: [InterviewSchedules]
+      parameters:
+        - name: interviewScheduleID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateInterviewScheduleRequest'
+      responses:
+        '200':
+          description: Interview schedule deactivated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivateInterviewScheduleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /slotiq/v1/interviewRescheduleRequests:
+    post:
+      summary: Create new interview reschedule request
+      description: Create a new interview reschedule request in the system
+      operationId: createInterviewRescheduleRequest
+      tags: [InterviewRescheduleRequests]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInterviewRescheduleRequestRequest'
+      responses:
+        '201':
+          description: Interview reschedule request created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInterviewRescheduleRequestResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    get:
+      summary: Get all interview reschedule requests
+      description: Retrieve list of all interview reschedule requests
+      operationId: getAllInterviewRescheduleRequests
+      tags: [InterviewRescheduleRequests]
+      parameters:
+          - name: isActive
+            in: query
+            required: false
+            schema:
+              type: boolean
+      responses:
+        '200':
+          description: Interview reschedule requests retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterviewRescheduleRequestsResponse'
+
+  /slotiq/v1/interviewRescheduleRequests/{interviewRescheduleRequestID}:
+    get:
+      summary: Get interview reschedule request by ID
+      description: Retrieve specific interview reschedule request details
+      operationId: getInterviewRescheduleRequestById
+      tags: [InterviewRescheduleRequests]
+      parameters:
+          - name: interviewRescheduleRequestID
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Interview reschedule request details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterviewRescheduleRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update interview reschedule request
+      description: Modify existing interview reschedule request details
+      operationId: updateInterviewRescheduleRequest
+      tags: [InterviewRescheduleRequests]
+      parameters:
+        - name: interviewRescheduleRequestID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInterviewRescheduleRequestRequest'
+      responses:
+        '200':
+          description: Interview reschedule request updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateInterviewRescheduleRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Deactivate interview reschedule request
+      description: Soft delete an interview reschedule request
+      operationId: deactivateInterviewRescheduleRequest
+      tags: [InterviewRescheduleRequests]
+      parameters:
+        - name: interviewRescheduleRequestID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateInterviewRescheduleRequestRequest'
+      responses:
+        '200':
+          description: Interview reschedule request deactivated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivateInterviewRescheduleRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /slotiq/v1/interviewScheduleChangeHistories:
+    post:
+      summary: Create new interview schedule change history
+      description: Create a new interview schedule change history in the system
+      operationId: createInterviewScheduleChangeHistory
+      tags: [InterviewScheduleChangeHistories]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInterviewScheduleChangeHistoryRequest'
+      responses:
+        '201':
+          description: Interview schedule change history created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInterviewScheduleChangeHistoryResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    get:
+      summary: Get all interview schedule change histories
+      description: Retrieve list of all interview schedule change histories
+      operationId: getAllInterviewScheduleChangeHistories
+      tags: [InterviewScheduleChangeHistories]
+      parameters:
+          - name: isActive
+            in: query
+            required: false
+            schema:
+              type: boolean
+      responses:
+        '200':
+          description: Interview schedule change histories retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterviewScheduleChangeHistoriesResponse'
+
+  /slotiq/v1/interviewScheduleChangeHistories/{rescheduleHistoryID}:
+    get:
+      summary: Get interview schedule change history by ID
+      description: Retrieve specific interview schedule change history details
+      operationId: getInterviewScheduleChangeHistoryById
+      tags: [InterviewScheduleChangeHistories]
+      parameters:
+          - name: rescheduleHistoryID
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Interview schedule change history details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterviewScheduleChangeHistoryResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update interview schedule change history
+      description: Modify existing interview schedule change history details
+      operationId: updateInterviewScheduleChangeHistory
+      tags: [InterviewScheduleChangeHistories]
+      parameters:
+        - name: rescheduleHistoryID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInterviewScheduleChangeHistoryRequest'
+      responses:
+        '200':
+          description: Interview schedule change history updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateInterviewScheduleChangeHistoryResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Deactivate interview schedule change history
+      description: Soft delete an interview schedule change history
+      operationId: deactivateInterviewScheduleChangeHistory
+      tags: [InterviewScheduleChangeHistories]
+      parameters:
+        - name: rescheduleHistoryID
+          in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateInterviewScheduleChangeHistoryRequest'
+      responses:
+        '200':
+          description: Interview schedule change history deactivated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivateInterviewScheduleChangeHistoryResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication
+  responses:
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Resource already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Permission denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    # DTOs and Requests/Responses for HiringOpportunity
+    HiringOpportunityDto:
+      type: object
+      required:
+        - hiringOpportunityID
+        - title
+        - opportunityCategoryID
+        - practiceID
+        - jobDescription
+        - plannedCandidatesCount
+        - statusID
+        - modUser
+        - source
+        - createdDate
+        - updatedDate
+      properties:
+        hiringOpportunityID:
+          type: string
+        title:
+          type: string
+        opportunityCategoryID:
+          type: string
+        practiceID:
+          type: string
+        jobDescription:
+          type: string
+        additionalNotes:
+          type: string
+        plannedCandidatesCount:
+          type: integer
+        statusID:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+        createdDate:
+          type: string
+        updatedDate:
+          type: string
+    CreateHiringOpportunityRequest:
+      type: object
+      required:
+        - title
+        - opportunityCategoryID
+        - practiceID
+        - jobDescription
+        - plannedCandidatesCount
+        - statusID
+        - modUser
+        - source
+      properties:
+        title:
+          type: string
+        opportunityCategoryID:
+          type: string
+        practiceID:
+          type: string
+        jobDescription:
+          type: string
+        additionalNotes:
+          type: string
+        plannedCandidatesCount:
+          type: integer
+        statusID:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+    CreateHiringOpportunityResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'HIRING_OPPORTUNITY_CREATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Hiring opportunity created successfully.'
+        status:
+          type: string
+          example: 'success'
+        hiringOpportunity:
+          $ref: '#/components/schemas/HiringOpportunityDto'
+        hiringOpportunityID:
+          type: string
+    GetHiringOpportunityResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'HIRING_OPPORTUNITY_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Hiring opportunity details retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        hiringOpportunity:
+          $ref: '#/components/schemas/HiringOpportunityDto'
+    GetHiringOpportunitiesResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'HIRING_OPPORTUNITIES_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Hiring opportunities retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        hiringOpportunities:
+          type: array
+          items:
+            $ref: '#/components/schemas/HiringOpportunityDto'
+    UpdateHiringOpportunityRequest:
+      type: object
+      required:
+        - modUser
+        - source
+      properties:
+        title:
+          type: string
+        opportunityCategoryID:
+          type: string
+        practiceID:
+          type: string
+        jobDescription:
+          type: string
+        additionalNotes:
+          type: string
+        plannedCandidatesCount:
+          type: integer
+        statusID:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+    UpdateHiringOpportunityResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'HIRING_OPPORTUNITY_UPDATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Hiring opportunity updated successfully.'
+        status:
+          type: string
+          example: 'success'
+        hiringOpportunity:
+          $ref: '#/components/schemas/HiringOpportunityDto'
+        hiringOpportunityID:
+          type: string
+    DeactivateHiringOpportunityRequest:
+      type: object
+      required:
+        - modUser
+        - source
+      properties:
+        modUser:
+          type: string
+        source:
+          type: integer
+    DeactivateHiringOpportunityResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'HIRING_OPPORTUNITY_DEACTIVATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Hiring opportunity deactivated successfully.'
+        status:
+          type: string
+          example: 'success'
+        hiringOpportunity:
+          $ref: '#/components/schemas/HiringOpportunityDto'
+        hiringOpportunityID:
+          type: string
+    # DTOs and Requests/Responses for CandidateProfile
+    CandidateProfileDto:
+      type: object
+      required:
+        - candidateProfileID
+        - hiringOpportunityID
+        - firstName
+        - lastName
+        - emailID
+        - designationAppliedFor
+        - designationPresentedFor
+        - yearsOfExperience
+        - candidateSource
+        - resumeDocument
+        - mappedTATeamMember
+        - modUser
+        - source
+        - createdDate
+        - updatedDate
+      properties:
+        candidateProfileID:
+          type: string
+        hiringOpportunityID:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        emailID:
+          type: string
+        designationAppliedFor:
+          type: string
+        designationPresentedFor:
+          type: string
+        yearsOfExperience:
+          type: number
+        candidateSource:
+          type: string
+        resumeDocument:
+          type: string
+        mappedTATeamMember:
+          type: string
+        modUser:
+          type: string
+        source:
+          type: integer
+        createdDate:
+          type: string
+        updatedDate:
+          type: string
+    CreateCandidateProfileRequest:
+      type: object
+      required:
+        - hiringOpportunityID
+        - firstName
+        - lastName
+        - emailID
+        - designationAppliedFor
+        - designationPresentedFor
+        - yearsOfExperience
+        - candidateSource
+        - resumeDocument
+        - mappedTATeamMember
+        - modUser
+        - source
+      properties:
+        hiringOpportunityID:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        emailID:
+          type: string
+        designationAppliedFor:
+          type: string
+        designationPresentedFor:
+          type: string
+        yearsOfExperience:
+          type: number
+        candidateSource:
+          type: string
+        resumeDocument:
+          type: string
+        mappedTATeamMember:
+          type: string
+        modUser:
+          type: string
+        source:
+          type: integer
+    CreateCandidateProfileResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'CANDIDATE_PROFILE_CREATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Candidate profile created successfully.'
+        status:
+          type: string
+          example: 'success'
+        candidateProfile:
+          $ref: '#/components/schemas/CandidateProfileDto'
+        candidateProfileID:
+          type: string
+    GetCandidateProfileResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'CANDIDATE_PROFILE_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Candidate profile details retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        candidateProfile:
+          $ref: '#/components/schemas/CandidateProfileDto'
+    GetCandidateProfilesResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'CANDIDATE_PROFILES_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Candidate profiles retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        candidateProfiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/CandidateProfileDto'
+    UpdateCandidateProfileRequest:
+      type: object
+      required:
+        - modUser
+        - source
+        - resumeDocument
+        - mappedTATeamMember
+      properties:
+        hiringOpportunityID:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        emailID:
+          type: string
+        designationAppliedFor:
+          type: string
+        designationPresentedFor:
+          type: string
+        yearsOfExperience:
+          type: number
+        candidateSource:
+          type: string
+        resumeDocument:
+          type: string
+        mappedTATeamMember:
+          type: string
+        modUser:
+          type: string
+        source:
+          type: integer
+    UpdateCandidateProfileResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'CANDIDATE_PROFILE_UPDATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Candidate profile updated successfully.'
+        status:
+          type: string
+          example: 'success'
+        candidateProfile:
+          $ref: '#/components/schemas/CandidateProfileDto'
+        candidateProfileID:
+          type: string
+    DeactivateCandidateProfileRequest:
+      type: object
+      required:
+        - modUser
+        - source
+      properties:
+        modUser:
+          type: string
+        source:
+          type: integer
+    DeactivateCandidateProfileResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'CANDIDATE_PROFILE_DEACTIVATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Candidate profile deactivated successfully.'
+        status:
+          type: string
+          example: 'success'
+        candidateProfile:
+          $ref: '#/components/schemas/CandidateProfileDto'
+        candidateProfileID:
+          type: string
+    # DTOs and Requests/Responses for InterviewSchedule
+    InterviewScheduleDto:
+      type: object
+      required:
+        - interviewScheduleID
+        - title
+        - notes
+        - technicalPanelMemberID
+        - candidateProfileID
+        - hiringOpportunityID
+        - interviewTypeID
+        - availabilityID
+        - scheduledDate
+        - scheduledTimeslotFrom
+        - scheduledTimeslotTo
+        - statusID
+        - modUser
+        - source
+        - createdDate
+        - updatedDate
+      properties:
+        interviewScheduleID:
+          type: string
+        title:
+          type: string
+        notes:
+          type: string
+        technicalPanelMemberID:
+          type: string
+        candidateProfileID:
+          type: string
+        hiringOpportunityID:
+          type: string
+        interviewTypeID:
+          type: string
+        availabilityID:
+          type: string
+        scheduledDate:
+          type: string
+        scheduledTimeslotFrom:
+          type: string
+        scheduledTimeslotTo:
+          type: string
+        statusID:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+        createdDate:
+          type: string
+        updatedDate:
+          type: string
+    CreateInterviewScheduleRequest:
+      type: object
+      required:
+        - title
+        - notes
+        - technicalPanelMemberID
+        - candidateProfileID
+        - hiringOpportunityID
+        - interviewTypeID
+        - availabilityID
+        - scheduledDate
+        - scheduledTimeslotFrom
+        - scheduledTimeslotTo
+        - statusID
+        - modUser
+        - source
+      properties:
+        title:
+          type: string
+        notes:
+          type: string
+        technicalPanelMemberID:
+          type: string
+        candidateProfileID:
+          type: string
+        hiringOpportunityID:
+          type: string
+        interviewTypeID:
+          type: string
+        availabilityID:
+          type: string
+        scheduledDate:
+          type: string
+        scheduledTimeslotFrom:
+          type: string
+        scheduledTimeslotTo:
+          type: string
+        statusID:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+    CreateInterviewScheduleResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULE_CREATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule created successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewSchedule:
+          $ref: '#/components/schemas/InterviewScheduleDto'
+        interviewScheduleID:
+          type: string
+    GetInterviewScheduleResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULE_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule details retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewSchedule:
+          $ref: '#/components/schemas/InterviewScheduleDto'
+    GetInterviewSchedulesResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULES_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedules retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewSchedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterviewScheduleDto'
+    UpdateInterviewScheduleRequest:
+      type: object
+      required:
+        - modUser
+        - source
+        - notes
+      properties:
+        title:
+          type: string
+        notes:
+          type: string
+        technicalPanelMemberID:
+          type: string
+        candidateProfileID:
+          type: string
+        hiringOpportunityID:
+          type: string
+        interviewTypeID:
+          type: string
+        availabilityID:
+          type: string
+        scheduledDate:
+          type: string
+        scheduledTimeslotFrom:
+          type: string
+        scheduledTimeslotTo:
+          type: string
+        statusID:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+    UpdateInterviewScheduleResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULE_UPDATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule updated successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewSchedule:
+          $ref: '#/components/schemas/InterviewScheduleDto'
+        interviewScheduleID:
+          type: string
+    DeactivateInterviewScheduleRequest:
+      type: object
+      required:
+        - modUser
+        - source
+      properties:
+        modUser:
+          type: string
+        source:
+          type: integer
+    DeactivateInterviewScheduleResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULE_DEACTIVATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule deactivated successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewSchedule:
+          $ref: '#/components/schemas/InterviewScheduleDto'
+        interviewScheduleID:
+          type: string
+    # DTOs and Requests/Responses for InterviewRescheduleRequest
+    CreateInterviewRescheduleRequestRequest:
+      type: object
+      required:
+        - interviewScheduleID
+        - previousInterviewScheduleID
+        - newInterviewScheduleID
+        - reason
+        - requestStatus
+        - modUser
+        - source
+      properties:
+        interviewScheduleID:
+          type: string
+        previousInterviewScheduleID:
+          type: string
+        newInterviewScheduleID:
+          type: string
+        reason:
+          type: string
+        requestStatus:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+    InterviewRescheduleRequestDto:
+      type: object
+      required:
+        - interviewRescheduleRequestID
+        - interviewScheduleID
+        - previousInterviewScheduleID
+        - newInterviewScheduleID
+        - reason
+        - requestStatus
+        - modUser
+        - source
+      properties:
+        interviewRescheduleRequestID:
+          type: string
+        interviewScheduleID:
+          type: string
+        previousInterviewScheduleID:
+          type: string
+        newInterviewScheduleID:
+          type: string
+        reason:
+          type: string
+        requestStatus:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+    CreateInterviewRescheduleRequestResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 'success'
+        interviewRescheduleRequest:
+          $ref: '#/components/schemas/InterviewRescheduleRequestDto'
+        interviewRescheduleRequestID:
+          type: string
+    GetInterviewRescheduleRequestResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_RESCHEDULE_REQUEST_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview reschedule request details retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewRescheduleRequest:
+          $ref: '#/components/schemas/InterviewRescheduleRequestDto'
+    GetInterviewRescheduleRequestsResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_RESCHEDULE_REQUESTS_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview reschedule requests retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewRescheduleRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterviewRescheduleRequestDto'
+    UpdateInterviewRescheduleRequestRequest:
+      type: object
+      required:
+        - modUser
+        - source
+      properties:
+        interviewScheduleID:
+          type: string
+        previousInterviewScheduleID:
+          type: string
+        newInterviewScheduleID:
+          type: string
+        reason:
+          type: string
+        requestStatus:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+    UpdateInterviewRescheduleRequestResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_RESCHEDULE_REQUEST_UPDATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview reschedule request updated successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewRescheduleRequest:
+          $ref: '#/components/schemas/InterviewRescheduleRequestDto'
+        interviewRescheduleRequestID:
+          type: string
+    DeactivateInterviewRescheduleRequestRequest:
+      type: object
+      required:
+        - modUser
+        - source
+      properties:
+        modUser:
+          type: string
+        source:
+          type: integer
+    DeactivateInterviewRescheduleRequestResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_RESCHEDULE_REQUEST_DEACTIVATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview reschedule request deactivated successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewRescheduleRequest:
+          $ref: '#/components/schemas/InterviewRescheduleRequestDto'
+        interviewRescheduleRequestID:
+          type: string
+    # DTOs and Requests/Responses for InterviewScheduleChangeHistory
+    InterviewScheduleChangeHistoryDto:
+      type: object
+      required:
+        - rescheduleHistoryID
+        - interviewScheduleID
+        - previousInterviewScheduleID
+        - newInterviewScheduleID
+        - interviewRescheduleRequestID
+        - interviewScheduleType
+        - reason
+        - requestStatus
+        - modUser
+        - source
+        - createdDate
+        - updatedDate
+      properties:
+        rescheduleHistoryID:
+          type: string
+        interviewScheduleID:
+          type: string
+        previousInterviewScheduleID:
+          type: string
+        newInterviewScheduleID:
+          type: string
+        interviewRescheduleRequestID:
+          type: string
+        interviewScheduleType:
+          type: integer
+        reason:
+          type: string
+        requestStatus:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+        createdDate:
+          type: string
+        updatedDate:
+          type: string
+    CreateInterviewScheduleChangeHistoryRequest:
+      type: object
+      required:
+        - interviewScheduleID
+        - previousInterviewScheduleID
+        - newInterviewScheduleID
+        - interviewRescheduleRequestID
+        - interviewScheduleType
+        - reason
+        - requestStatus
+        - modUser
+        - source
+      properties:
+        interviewScheduleID:
+          type: string
+        previousInterviewScheduleID:
+          type: string
+        newInterviewScheduleID:
+          type: string
+        interviewRescheduleRequestID:
+          type: string
+        interviewScheduleType:
+          type: integer
+        reason:
+          type: string
+        requestStatus:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+    CreateInterviewScheduleChangeHistoryResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULE_CHANGE_HISTORY_CREATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule change history created successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewScheduleChangeHistory:
+          $ref: '#/components/schemas/InterviewScheduleChangeHistoryDto'
+        rescheduleHistoryID:
+          type: string
+    GetInterviewScheduleChangeHistoryResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULE_CHANGE_HISTORY_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule change history details retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewScheduleChangeHistory:
+          $ref: '#/components/schemas/InterviewScheduleChangeHistoryDto'
+    GetInterviewScheduleChangeHistoriesResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULE_CHANGE_HISTORIES_GET_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule change histories retrieved successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewScheduleChangeHistories:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterviewScheduleChangeHistoryDto'
+    UpdateInterviewScheduleChangeHistoryRequest:
+      type: object
+      required:
+        - modUser
+        - source
+      properties:
+        interviewScheduleID:
+          type: string
+        previousInterviewScheduleID:
+          type: string
+        newInterviewScheduleID:
+          type: string
+        interviewRescheduleRequestID:
+          type: string
+        interviewScheduleType:
+          type: integer
+        reason:
+          type: string
+        requestStatus:
+          type: integer
+        modUser:
+          type: string
+        source:
+          type: integer
+    UpdateInterviewScheduleChangeHistoryResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULE_CHANGE_HISTORY_UPDATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule change history updated successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewScheduleChangeHistory:
+          $ref: '#/components/schemas/InterviewScheduleChangeHistoryDto'
+        rescheduleHistoryID:
+          type: string
+    DeactivateInterviewScheduleChangeHistoryRequest:
+      type: object
+      required:
+        - modUser
+        - source
+      properties:
+        modUser:
+          type: string
+        source:
+          type: integer
+    DeactivateInterviewScheduleChangeHistoryResponse:
+      type: object
+      properties:
+        successCode:
+          type: string
+          example: 'INTERVIEW_SCHEDULE_CHANGE_HISTORY_DEACTIVATE_SUCCESS'
+        successMessage:
+          type: string
+          example: 'Interview schedule change history deactivated successfully.'
+        status:
+          type: string
+          example: 'success'
+        interviewScheduleChangeHistory:
+          $ref: '#/components/schemas/InterviewScheduleChangeHistoryDto'
+        rescheduleHistoryID:
+          type: string
+    # Common Error Response
+    ErrorResponse:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string

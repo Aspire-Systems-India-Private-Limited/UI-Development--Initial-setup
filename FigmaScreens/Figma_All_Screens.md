@@ -182,11 +182,39 @@ Candidate | Opportunity | Panel | Slot | Level | Status | Actions
 
 ## 11. Feedback Management Screen
 **Purpose:** Submit and review interview feedback.
+
+### A. Feedback Submission (Panel Member)
+**Relation:** Linked to completed interviews. Panel members submit feedback for each interview they conduct. Feedback is tied to InterviewID, Candidate, and Panel Member.
 **Fields:**
-**Actions:** Submit Feedback, Review Feedback, View Details
+- InterviewID (auto, hidden)
+- Candidate Name (display)
+- Panel Member Name (display)
+- Interview Date/Time (display)
+- Rating (dropdown or stars, required)
+- Decision (dropdown: Selected/Rejected/On Hold, required)
+- Feedback Comments (textarea, required)
+- Attachments (file upload, optional)
+- Source (dropdown, required)
+**Actions:** Submit Feedback, Save as Draft
 **Layout:**
-Candidate | Panel | Date | Rating | Decision | Actions
-[View Details]
+Candidate | Panel | Date/Time | Rating | Decision | Comments | Attachments | [Submit] [Save Draft]
+
+### B. Feedback Review (TA/Admin)
+**Relation:** Displays all feedback submitted by panel members for completed interviews. Used by TA/Admin to review and track interview outcomes.
+**Fields:**
+- Candidate Name
+- Panel Member Name
+- Interview Date/Time
+- Rating
+- Decision
+- Feedback Comments
+- Attachments
+- Status (Reviewed/Not Reviewed)
+- Source
+**Actions:** Review Feedback, Mark as Reviewed, View Details
+**Layout:**
+Candidate | Panel | Date | Rating | Decision | Status | Actions
+[View Details] [Mark as Reviewed]
 
 
 ## 12. Interview Reschedule Request Screen

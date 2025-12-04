@@ -51,7 +51,7 @@
 ### UI Elements:
 - Stat cards: Total Practices, Total Users, Active Opportunities, Total Candidates, Scheduled Interviews
 - Recent Activity feed
-- Quick actions: Add Practice, Add User, View Reports
+- Quick actions: Add Practice, Add User
 
 ### Navigation Menu Items:
 - Dashboard
@@ -64,7 +64,6 @@
 - Candidate Management
 - Interview Scheduling
 - Feedback Management
-- Reports & Analytics
 
 ---
 
@@ -130,7 +129,6 @@
 - Interview Scheduling
 - Interview Reschedule Requests
 - Feedback Review
-- Reports
 
 ---
 
@@ -234,7 +232,7 @@
 - Hover tooltips
 
 ### Quick Actions by Role:
-**Master Admin:** Add Practice, Add User, Create Report  
+**Master Admin:** Add Practice, Add User  
 **Practice Admin:** Add Panel Member, Create Opportunity, Schedule Interview  
 **TA Team Admin:** Add Candidate, Schedule Interview, View Requests  
 **Tech Panel Member:** Manage Slots, Submit Feedback, View Schedule

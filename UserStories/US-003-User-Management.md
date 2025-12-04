@@ -115,52 +115,39 @@
 
 ---
 
-## US-003.4: View User Details
+## US-003.4: View/Edit User Details
 **As a** Master Admin or Practice Admin  
-**I want to** view detailed information about a specific user  
-**So that** I can see their complete profile and activity
+**I want to** view and edit detailed information about a specific user  
+**So that** I can see their complete profile and update details when needed
 
 ### Acceptance Criteria:
-- [ ] Clicking user name or "View" action opens user detail modal/page
+- [ ] Clicking user name or "View" action opens user detail modal/page in view mode
 - [ ] Display all user information: Username, Full Name, Email, Phone, Role, Practice, Status
 - [ ] Show audit information: Created Date, Modified Date, Created By, Modified By
 - [ ] Display user activity summary (e.g., interviews conducted for panel members)
 - [ ] Show associated practice details
-- [ ] "Edit" and "Deactivate" buttons available (if user has permissions)
+- [ ] "Edit" button enables editing mode (toggles view to edit mode)
+- [ ] In edit mode:
+  - Form fields become editable with pre-populated data
+  - Allow editing: FirstName, LastName, EmailID, PhoneNumber, RoleID, PracticeID
+  - Username displayed as read-only
+  - Password cannot be edited via this form
+  - All validations apply as in Add User form
+  - Practice Admin can only edit users in their practice
+  - Master Admin can edit any user
+- [ ] "Save" button updates user and displays success message (in edit mode)
+- [ ] "Cancel" button discards changes and returns to view mode
+- [ ] Display confirmation dialog if role or practice is changed
+- [ ] "Deactivate" button available (if user has permissions)
 - [ ] "Close" button returns to user list
+- [ ] Audit fields updated automatically when saved (ModifiedDate, ModifiedBy)
 
 ### UI Elements:
-- User detail modal/page
+- User detail modal/page with view/edit toggle
 - Information sections: Personal Info, Role & Practice, Audit Info, Activity Summary
-- Action buttons: Edit, Deactivate, Close
-
-### Related FR: FR#MAP-4 – Retrieve Selected Member Details
-
----
-
-## US-003.5: Edit User Details
-**As a** Master Admin or Practice Admin  
-**I want to** edit user information  
-**So that** I can update user details when needed
-
-### Acceptance Criteria:
-- [ ] "Edit" action in user row or detail view opens edit form
-- [ ] Form pre-populated with existing user data
-- [ ] Allow editing: FirstName, LastName, EmailID, PhoneNumber, RoleID, PracticeID
-- [ ] Username cannot be edited (read-only)
-- [ ] Password cannot be edited via this form
-- [ ] All validations apply as in Add User form
-- [ ] Practice Admin can only edit users in their practice
-- [ ] Master Admin can edit any user
-- [ ] "Save" button updates user and displays success message
-- [ ] "Cancel" button discards changes
-- [ ] Display confirmation if role or practice is changed
-- [ ] Audit fields updated automatically (ModifiedDate, ModifiedBy)
-
-### UI Elements:
-- Edit form modal with pre-filled fields
-- Save button (primary)
-- Cancel button (secondary)
+- Action buttons (view mode): Edit, Deactivate, Close
+- Action buttons (edit mode): Save, Cancel
+- Editable form fields (in edit mode)
 - Confirmation dialog for role/practice changes
 - Success notification
 
@@ -170,12 +157,13 @@
 - Role change may affect user's permissions
 - Practice change reassigns user's scope
 - Cannot edit deactivated users
+- Must have appropriate permissions to enable edit mode
 
-### Related FR: FR#MAP-2 – Modify Member Details
+### Related FR: FR#MAP-4 – Retrieve Selected Member Details, FR#MAP-2 – Modify Member Details
 
 ---
 
-## US-003.6: Deactivate User
+## US-003.5: Deactivate User
 **As a** Master Admin or Practice Admin  
 **I want to** deactivate a user account  
 **So that** they no longer have access to the system
@@ -210,7 +198,7 @@
 
 ---
 
-## US-003.7: Reactivate User
+## US-003.6: Reactivate User
 **As a** Master Admin or Practice Admin  
 **I want to** reactivate a previously deactivated user  
 **So that** they can regain access to the system
@@ -231,7 +219,7 @@
 
 ---
 
-## US-003.8: Sort User List
+## US-003.7: Sort User List
 **As a** Master Admin or Practice Admin  
 **I want to** sort the user list by different columns  
 **So that** I can organize users in a way that makes sense for my task
@@ -250,7 +238,7 @@
 
 ---
 
-## US-003.9: Pagination for User List
+## US-003.8: Pagination for User List
 **As a** Master Admin or Practice Admin  
 **I want to** navigate through pages of users  
 **So that** I can view large lists without performance issues
@@ -275,7 +263,7 @@
 
 ---
 
-## US-003.10: Bulk User Actions
+## US-003.9: Bulk User Actions
 **As a** Master Admin  
 **I want to** perform actions on multiple users simultaneously  
 **So that** I can manage users efficiently

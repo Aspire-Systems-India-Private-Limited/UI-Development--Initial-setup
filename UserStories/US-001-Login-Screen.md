@@ -67,15 +67,24 @@
 **So that** I can verify what I've typed before submitting
 
 ### Acceptance Criteria:
-- [ ] Eye icon displayed at the end of password field
-- [ ] Clicking eye icon toggles password visibility
-- [ ] Icon changes to indicate current state (show/hide)
+- [ ] Eye icon displayed at the end of password field only when password has been entered
+- [ ] Icon is hidden when password field is empty
+- [ ] Clicking eye icon toggles password visibility between masked and visible
+- [ ] Icon changes to indicate current state (eye-open for show, eye-closed for hide)
 - [ ] Password remains masked by default
 - [ ] Toggle state resets after form submission
+- [ ] Icon does not overlap with password text
+- [ ] Only one eye icon is displayed at a time
 
 ### UI Elements:
-- Eye icon button in password field
-- Visual indicator for show/hide state
+- Eye icon button positioned inside password field on the right (conditional display)
+- Visual indicator for show/hide state (eye-open/eye-closed icons)
+- Proper spacing to prevent overlapping with input text
+
+### Business Rules:
+- Eye icon appears only when password field contains text
+- Icon disappears when password field is cleared
+- Default state is password masked (eye-closed icon when visible)
 
 ---
 

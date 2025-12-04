@@ -102,52 +102,40 @@
 
 ---
 
-## US-004.4: View Practice Details
+## US-004.4: View/Edit Practice Details
 **As a** Master Admin  
-**I want to** view detailed information about a practice  
-**So that** I can see complete practice information and assigned admins
+**I want to** view and edit detailed information about a practice  
+**So that** I can see complete practice information and update details when needed
 
 ### Acceptance Criteria:
-- [ ] Clicking practice card opens practice detail modal/page
+- [ ] Clicking practice card opens practice detail modal/page in view mode
 - [ ] Display practice information: Name, Description, Status
 - [ ] Show assigned admins list with names and contact info
 - [ ] Display member count in practice
 - [ ] Show active opportunities count for practice
 - [ ] Display audit information: Created Date, Modified Date
-- [ ] "Edit" and "Deactivate" buttons available
+- [ ] "Edit" button enables editing mode (toggles view to edit mode)
+- [ ] In edit mode:
+  - Form fields become editable with pre-populated data
+  - Allow editing: Practice Name, Description
+  - Practice name uniqueness validated (excluding current practice)
+  - All validations apply
+- [ ] "Save" button updates practice and displays success message (in edit mode)
+- [ ] "Cancel" button discards changes and returns to view mode
+- [ ] "Deactivate" button available in view mode
 - [ ] "Manage Admins" button to assign/remove admins
 - [ ] "Close" button returns to practice list
-
-### UI Elements:
-- Practice detail modal/page
-- Information sections: Basic Info, Assigned Admins, Statistics, Audit Info
-- Action buttons: Edit, Deactivate, Manage Admins, Close
-- Admin list with profile cards
-- Statistics cards (Members, Opportunities)
-
-### Related FR: FR#PMP-3 - Get Practice Details
-
----
-
-## US-004.5: Edit Practice Details
-**As a** Master Admin  
-**I want to** edit practice information  
-**So that** I can update practice details when needed
-
-### Acceptance Criteria:
-- [ ] "Edit" button in practice card or detail view opens edit form
-- [ ] Form pre-populated with existing practice data
-- [ ] Allow editing: Practice Name, Description
-- [ ] Practice name uniqueness validated (excluding current practice)
-- [ ] "Save" button updates practice and displays success message
-- [ ] "Cancel" button discards changes
-- [ ] Audit fields updated automatically (ModifiedDate, ModUser)
+- [ ] Audit fields updated automatically when saved (ModifiedDate, ModUser)
 - [ ] Updated practice card reflects changes immediately
 
 ### UI Elements:
-- Edit form modal with pre-filled fields
-- Save button (primary)
-- Cancel button (secondary)
+- Practice detail modal/page with view/edit toggle
+- Information sections: Basic Info, Assigned Admins, Statistics, Audit Info
+- Action buttons (view mode): Edit, Deactivate, Manage Admins, Close
+- Action buttons (edit mode): Save, Cancel
+- Editable form fields (in edit mode)
+- Admin list with profile cards
+- Statistics cards (Members, Opportunities)
 - Success notification
 
 ### Business Rules:
@@ -156,11 +144,11 @@
 - Cannot edit if practice has active dependencies (validate server-side)
 - ModifiedDate and ModUser updated on save
 
-### Related FR: FR#PMP-2 - Update Practice Details
+### Related FR: FR#PMP-3 - Get Practice Details, FR#PMP-2 - Update Practice Details
 
 ---
 
-## US-004.6: Assign Practice Admins
+## US-004.5: Assign Practice Admins
 **As a** Master Admin  
 **I want to** assign or remove admins for a practice  
 **So that** practices have dedicated administrators
@@ -191,7 +179,7 @@
 
 ---
 
-## US-004.7: Deactivate Practice
+## US-004.6: Deactivate Practice
 **As a** Master Admin  
 **I want to** deactivate a practice  
 **So that** inactive practices are not shown in dropdowns and operations
@@ -223,7 +211,7 @@
 
 ---
 
-## US-004.8: Reactivate Practice
+## US-004.7: Reactivate Practice
 **As a** Master Admin  
 **I want to** reactivate a previously deactivated practice  
 **So that** it can be used again for operations
@@ -243,7 +231,7 @@
 
 ---
 
-## US-004.9: View Practice Statistics
+## US-004.8: View Practice Statistics
 **As a** Master Admin  
 **I want to** see statistics for each practice  
 **So that** I understand practice utilization and activity
@@ -265,7 +253,7 @@
 
 ---
 
-## US-004.10: Sort Practice List
+## US-004.9: Sort Practice List
 **As a** Master Admin  
 **I want to** sort practices by different criteria  
 **So that** I can organize practices meaningfully

@@ -368,25 +368,6 @@
 
 ---
 
-## US-008.13: Export Opportunities List
-**As a** Master Admin, TA Team Admin, or Practice Admin  
-**I want to** export opportunity information  
-**So that** I can use data for reporting and analysis
-
-### Acceptance Criteria:
-- [ ] "Export" button available above opportunity table
-- [ ] Export format options: CSV, Excel
-- [ ] Exported file includes: Title, Category, Practice, Designation, JD, Status, Candidate Count, Created Date
-- [ ] Export respects current filters/search
-- [ ] File name format: Opportunities_YYYYMMDD_HHMMSS
-- [ ] Download starts automatically
-
-### UI Elements:
-- Export button with format dropdown
-- Success notification
-
----
-
 ## US-008.14: View Opportunity Deactivation History
 **As a** Master Admin or TA Team Admin  
 **I want to** view deactivation history for an opportunity  

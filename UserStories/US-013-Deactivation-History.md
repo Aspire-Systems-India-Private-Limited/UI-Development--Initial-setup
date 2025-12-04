@@ -160,26 +160,6 @@
 
 ---
 
-## US-013.7: Export Deactivation History
-**As a** Master Admin or TA Team Admin  
-**I want to** export deactivation history  
-**So that** I can use data for reporting and analysis
-
-### Acceptance Criteria:
-- [ ] "Export" button available above history table
-- [ ] Export format options: CSV, Excel
-- [ ] Exported file includes: Deactivation ID, Opportunity, Reason, Deactivated By, Deactivated Date, Previous Status, New Status, Source
-- [ ] Export respects current filters/search
-- [ ] File name format: DeactivationHistory_YYYYMMDD_HHMMSS
-- [ ] Download starts automatically
-
-### UI Elements:
-- Export button with format dropdown
-- Download progress indicator (if large dataset)
-- Success notification
-
----
-
 ## US-013.8: View Deactivation Statistics
 **As a** Master Admin  
 **I want to** see statistics about opportunity deactivations  
@@ -217,7 +197,6 @@
   - Reasons by practice (if applicable)
   - Reason trends over time
 - [ ] Filter by date range, practice
-- [ ] Export analysis report
 
 ### UI Elements:
 - Deactivation Reasons Analysis view
@@ -225,7 +204,6 @@
 - Top reasons list
 - Trend chart
 - Filter controls
-- Export button
 
 ---
 
@@ -243,13 +221,11 @@
   - Reason provided
   - Source application
 - [ ] Filter by user, date range, opportunity
-- [ ] Export audit trail
 
 ### UI Elements:
 - Audit Trail view
 - Detailed action log table
 - Filter controls
-- Export button
 
 ---
 
@@ -270,40 +246,6 @@
 - Event milestones with icons
 - Deactivation event indicator
 - Details on click
-
----
-
-## US-013.12: Generate Deactivation Report
-**As a** Master Admin or Practice Admin  
-**I want to** generate comprehensive deactivation reports  
-**So that** I can analyze deactivation trends and present to stakeholders
-
-### Acceptance Criteria:
-- [ ] "Generate Report" feature allows selecting:
-  - Report type (Summary, Detailed, By Practice, By Reason)
-  - Date range
-  - Practice filter (if applicable)
-  - Format (PDF, Excel)
-- [ ] Report includes:
-  - Executive summary with key metrics
-  - Deactivation list with all details
-  - Charts and visualizations
-  - Reason analysis
-  - Recommendations (optional)
-- [ ] Report generation queued if large dataset
-- [ ] Download link provided when ready
-- [ ] Success notification confirms report generation
-
-### UI Elements:
-- "Generate Report" button
-- Report configuration modal
-- Report type selector
-- Date range and filter options
-- Format selector
-- Generate button
-- Progress indicator
-- Download link
-- Success notification
 
 ---
 

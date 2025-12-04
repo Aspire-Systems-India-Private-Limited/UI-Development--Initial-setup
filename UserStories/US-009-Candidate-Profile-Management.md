@@ -409,25 +409,6 @@
 
 ---
 
-## US-009.15: Export Candidates List
-**As a** TA Team Admin  
-**I want to** export candidate information  
-**So that** I can use data for reporting and analysis
-
-### Acceptance Criteria:
-- [ ] "Export" button available above candidate table
-- [ ] Export format options: CSV, Excel
-- [ ] Exported file includes: Name, Email, Phone, Opportunity, Designation, Status, Experience, Source, Created Date
-- [ ] Export respects current filters/search
-- [ ] File name format: Candidates_YYYYMMDD_HHMMSS
-- [ ] Download starts automatically
-
-### UI Elements:
-- Export button with format dropdown
-- Success notification
-
----
-
 ## US-009.16: Bulk Import Candidates
 **As a** TA Team Admin  
 **I want to** import multiple candidates from a file  

@@ -306,7 +306,6 @@
 - [ ] Filter interviews by date range, status (Completed, Upcoming, Cancelled)
 - [ ] Pagination for long history lists
 - [ ] Click interview to view details
-- [ ] Export interview history to CSV/Excel
 
 ### UI Elements:
 - Interview History tab/section
@@ -315,7 +314,6 @@
 - Status filter
 - Pagination controls
 - View Details link
-- Export button
 
 ---
 
@@ -368,26 +366,6 @@
 - Sort indicators in column headers
 - Pagination controls
 - Page size dropdown
-
----
-
-## US-006.13: Export Panel Member List
-**As a** Master Admin or Practice Admin  
-**I want to** export panel member information  
-**So that** I can use data in reports or external systems
-
-### Acceptance Criteria:
-- [ ] "Export" button available above member table
-- [ ] Export format options: CSV, Excel
-- [ ] Exported file includes: Name, Email, Phone, Practice, Qualification Levels, Status
-- [ ] Export respects current filters/search
-- [ ] File name format: PanelMembers_YYYYMMDD_HHMMSS
-- [ ] Download starts automatically
-
-### UI Elements:
-- Export button with format dropdown
-- Download progress indicator
-- Success notification
 
 ---
 

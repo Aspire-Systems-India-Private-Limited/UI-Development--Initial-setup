@@ -394,23 +394,6 @@
 
 ---
 
-## US-012.14: Export Reschedule Requests
-**As a** TA Team Admin  
-**I want to** export reschedule request information  
-**So that** I can use data for reporting
-
-### Acceptance Criteria:
-- [ ] "Export" button available above requests table
-- [ ] Export format options: CSV, Excel
-- [ ] Exported file includes: Request ID, Request Date, Candidate, Panel Member, Previous Date/Time, New Date/Time, Reason, Status
-- [ ] Export respects current filters
-- [ ] File name format: RescheduleRequests_YYYYMMDD_HHMMSS
-
-### UI Elements:
-- Export button with format dropdown
-
----
-
 ## US-012.15: Reschedule Request Notifications
 **As a** Panel Member, TA Team Admin, or Candidate  
 **I want to** receive notifications about reschedule requests  

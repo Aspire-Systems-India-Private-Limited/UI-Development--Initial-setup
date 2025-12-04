@@ -375,14 +375,12 @@
 - [ ] Filter by status (Completed, Cancelled)
 - [ ] Display feedback status for completed interviews
 - [ ] Click interview to view details including feedback
-- [ ] Export history to CSV/Excel
 
 ### UI Elements:
 - Interview History tab/section
 - Date range filter
 - Status filter
 - Interview table with feedback indicator
-- Export button
 
 ---
 
@@ -465,23 +463,6 @@
 
 ### UI Elements:
 - Pagination controls at bottom of table
-
----
-
-## US-010.16: Export Interview Schedule
-**As a** TA Team Admin  
-**I want to** export interview schedule  
-**So that** I can use data for reporting
-
-### Acceptance Criteria:
-- [ ] "Export" button available above interview table
-- [ ] Export format options: CSV, Excel
-- [ ] Exported file includes: Date/Time, Candidate, Panel Member, Opportunity, Type, Level, Status
-- [ ] Export respects current filters
-- [ ] File name format: InterviewSchedule_YYYYMMDD_HHMMSS
-
-### UI Elements:
-- Export button with format dropdown
 
 ---
 

@@ -285,7 +285,7 @@
 - [ ] "Select All" checkbox in table header
 - [ ] Selected user count displayed
 - [ ] Bulk action dropdown appears when users selected
-- [ ] Available bulk actions: Deactivate, Export
+- [ ] Available bulk action: Deactivate
 - [ ] Confirmation dialog for bulk deactivate
 - [ ] Success message shows count of affected users
 - [ ] Clear selection after action completion
@@ -295,27 +295,6 @@
 - Selected count badge
 - Bulk actions dropdown
 - Confirmation dialog
-- Success notification
-
----
-
-## US-003.11: Export User List
-**As a** Master Admin or Practice Admin  
-**I want to** export the user list to CSV or Excel  
-**So that** I can use the data in external tools or reports
-
-### Acceptance Criteria:
-- [ ] "Export" button available above user table
-- [ ] Export format options: CSV, Excel
-- [ ] Exported file includes all filtered/searched users
-- [ ] File name format: Users_YYYYMMDD_HHMMSS
-- [ ] Export includes: Username, Name, Email, Phone, Role, Practice, Status
-- [ ] Download starts automatically after clicking export
-- [ ] Success message confirms export completion
-
-### UI Elements:
-- Export button with dropdown for format selection
-- Download progress indicator
 - Success notification
 
 ---

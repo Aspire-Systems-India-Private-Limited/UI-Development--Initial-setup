@@ -171,14 +171,12 @@
 - [ ] Filter by date range, decision, rating
 - [ ] Click feedback to view full details (read-only)
 - [ ] Search by candidate name
-- [ ] Export feedback history to PDF
 
 ### UI Elements:
 - My Feedback History section
 - Feedback list/table
 - Filters (date range, decision, rating)
 - View Details link
-- Export button
 
 ---
 
@@ -228,18 +226,17 @@
   - Overall rating and decision
   - Feedback comments, strengths, areas for improvement
   - Skill ratings (technical, communication, cultural fit)
-  - Attachments with download option
+  - Attachments (view inline or in modal)
 - [ ] Show submission timestamp and panel member info
 - [ ] Display feedback status
 - [ ] "Mark as Reviewed" button (if not yet reviewed)
-- [ ] "Download Feedback" button (PDF export)
 - [ ] "Close" button returns to feedback list
 
 ### UI Elements:
 - Feedback detail modal/page
 - Information sections: Interview Context, Overall Evaluation, Detailed Feedback, Skill Ratings, Attachments
-- Action buttons: Mark as Reviewed, Download Feedback, Close
-- Download Attachments links
+- Action buttons: Mark as Reviewed, Close
+- Attachment viewer
 
 ---
 
@@ -318,7 +315,6 @@
 - [ ] Display feedback from each round with panel member details
 - [ ] Visual summary chart (ratings, decisions)
 - [ ] Recommendation indicator based on feedback
-- [ ] "Download All Feedback" button for complete report
 
 ### UI Elements:
 - Candidate Feedback Summary view
@@ -326,7 +322,6 @@
 - Decision breakdown chart
 - Feedback cards for each round
 - Visual charts/graphs
-- Download All button
 
 ---
 
@@ -341,14 +336,12 @@
 - [ ] Display for each candidate: Average rating, decision summary, key feedback points
 - [ ] Highlight differences and similarities
 - [ ] Sort candidates by average rating
-- [ ] Export comparison report
 
 ### UI Elements:
 - Compare Candidates button
 - Candidate selection interface
 - Comparison table/view
 - Sort controls
-- Export button
 
 ---
 
@@ -431,25 +424,6 @@
 
 ### UI Elements:
 - Pagination controls at bottom of table
-
----
-
-## US-011.16: Export Feedback Reports
-**As a** TA Team Admin or Practice Admin  
-**I want to** export feedback information  
-**So that** I can use data for reporting and analysis
-
-### Acceptance Criteria:
-- [ ] "Export" button available above feedback table
-- [ ] Export format options: CSV, Excel, PDF
-- [ ] Exported file includes: Interview Date, Candidate, Panel Member, Rating, Decision, Comments
-- [ ] Export respects current filters
-- [ ] PDF export includes formatted feedback with all details
-- [ ] File name format: Feedback_YYYYMMDD_HHMMSS
-
-### UI Elements:
-- Export button with format dropdown
-- Success notification
 
 ---
 

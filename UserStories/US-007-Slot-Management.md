@@ -411,25 +411,6 @@
 
 ---
 
-## US-007.14: Export Availability Slots
-**As a** TA Team Admin or Practice Admin  
-**I want to** export slot information  
-**So that** I can use data for planning and reporting
-
-### Acceptance Criteria:
-- [ ] "Export" button available in table view
-- [ ] Export format options: CSV, Excel
-- [ ] Exported file includes: Date, Start Time, End Time, Panel Member, Status, Reason
-- [ ] Export respects current filters
-- [ ] File name format: Availability_YYYYMMDD_HHMMSS
-- [ ] Download starts automatically
-
-### UI Elements:
-- Export button with format dropdown
-- Success notification
-
----
-
 ## US-007.15: Receive Slot Reminders (Future Enhancement)
 **As a** panel member  
 **I want to** receive reminders about my upcoming availability  

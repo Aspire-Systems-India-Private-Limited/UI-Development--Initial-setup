@@ -282,24 +282,6 @@
 
 ---
 
-## US-004.11: Export Practice List
-**As a** Master Admin  
-**I want to** export practice information  
-**So that** I can use data in reports or external systems
-
-### Acceptance Criteria:
-- [ ] "Export" button available above practice list
-- [ ] Export format: CSV, Excel
-- [ ] Exported file includes: Practice Name, Description, Admin Count, Member Count, Status, Created Date
-- [ ] File name format: Practices_YYYYMMDD_HHMMSS
-- [ ] Download starts automatically
-
-### UI Elements:
-- Export button with format dropdown
-- Success notification
-
----
-
 ## Technical Notes:
 - Implement server-side validation for practice name uniqueness
 - Use optimistic UI updates for better UX
